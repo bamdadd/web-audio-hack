@@ -24,17 +24,17 @@ function NoteRepo(type, noteNumber, timer){
         note_to_finish.end_time = timer;
         notes.push(note_to_finish);
     }
-    console.log(notes);
+    // console.log(notes);
 
 }
 
-function Visualiser(midifile){
+function Visualiser(midifile, callback){
     timer = 0
     _.each(midifile.tracks, function(track){
         events = _.filter(track, function(e){return e.subtype== 'noteOn' || e.subtype == 'noteOff'})
         _.each(events, function(e){
             timer += e.deltaTime;
-            console.log(e);
+            // console.log(e);
             if (e.subtype == 'noteOn'){
                 NoteRepo('start', e.noteNumber, timer)
             }

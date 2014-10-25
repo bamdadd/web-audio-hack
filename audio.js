@@ -10,6 +10,8 @@ function AudioPlayer(generator, opts) {
 	var requestStop = false;
 	
 	if (audioElement.mozSetup) {
+		console.log("moz");
+
 		audioElement.mozSetup(2, sampleRate); /* channels, sample rate */
 		
 		var buffer = []; /* data generated but not yet written */
@@ -37,6 +39,7 @@ function AudioPlayer(generator, opts) {
 			}
 		}
 	} else if (webkitAudio) {
+		// console.log("webkit");
 		// Uses Webkit Web Audio API if available
 		var context = new webkitAudio();
 		sampleRate = context.sampleRate;
@@ -59,6 +62,8 @@ function AudioPlayer(generator, opts) {
 
 			var generate = generator.generate(bufferSize);
 
+			// console.log(generate);
+
 			for (var i = 0; i < bufferSize; ++i) {
 				dataLeft[i] = generate[i*2];
 				dataRight[i] = generate[i*2+1];
@@ -78,6 +83,7 @@ function AudioPlayer(generator, opts) {
 		}
 
 	} else {
+		// console.log("flash");
 		// Fall back to creating flash player
 		var c = document.createElement('div');
 		c.innerHTML = '<embed type="application/x-shockwave-flash" id="da-swf" src="da.swf" width="8" height="8" allowScriptAccess="always" style="position: fixed; left:-10px;" />';
