@@ -1,7 +1,9 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
+        <script src="js/underscore-min.js"></script>
 		<script src="stream.js"></script>
+		<script src="visualiser.js"></script>
 		<script src="midifile.js"></script>
 		<script src="replayer.js"></script>
 		<script src="synth.js"></script>
@@ -30,7 +32,7 @@
 			function play(file) {
 				loadRemote(file, function(data) {
 					midiFile = MidiFile(data);
-                    console.log(midiFile);
+                    visualiser = Visualiser(midiFile);
 					synth = Synth(44100);
 					replayer = Replayer(midiFile, synth);
 					audio = AudioPlayer(replayer);
@@ -72,5 +74,6 @@
 		<a href="javascript:void(play('minute_waltz.mid'))">Chopin - Waltz Op.61 (Minute Waltz)</a> |
 		<a href="javascript:void(play('rachmaninov3.mid'))">Rachmaninov - Piano Concerto No.3 (First movement)</a>
 		<a href="javascript:void(play('simple.mid'))">simple</a>
+		<a href="javascript:void(play('overlap.mid'))">overlap</a>
 	</body>
 </html>
