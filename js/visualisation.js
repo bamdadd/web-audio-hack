@@ -1,5 +1,8 @@
 var notesToVisualise = [];
 
+var keyboard = Keyboard(document);
+var mono = MonoSynth(keyboard, 1);
+
 function drawChart() {
     $('.chart').remove();
 
