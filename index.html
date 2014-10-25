@@ -62,9 +62,15 @@ function loadRemote(path, callback) {
 
 				var taskNames = [];
 
-				for(var i=0; i < 128; i++) { 
-					taskNames.push(i);
-				};
+
+                notes.sort(function(a, b) {
+                    return a.noteNumber - b.noteNumber;
+                });
+
+
+                for(var i=notes[0].noteNumber; i <= notes[notes.length-1].noteNumber; i++) {
+                    taskNames.push(i);
+                };
 
 				now = new Date();
 
