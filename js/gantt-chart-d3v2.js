@@ -30,7 +30,7 @@ d3.gantt = function() {
 	return "translate(" + x(d.startDate) + "," + y(d.taskName) + ")";
     };
 
-    var x = d3.time.scale().domain([ timeDomainStart, timeDomainEnd ]).range([ 0, width ]).clamp(true);
+    var x = d3.time.scale().domain([ 0, timeDomainEnd ]).range([ 0, width ]).clamp(true);
 
     var y = d3.scale.ordinal().domain(taskTypes).rangeRoundBands([ 0, height - margin.top - margin.bottom ], .1);
     
@@ -65,7 +65,7 @@ d3.gantt = function() {
 
 	yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
     };
-    
+
     function gantt(tasks) {
 	
 	initTimeDomain();
@@ -96,7 +96,7 @@ d3.gantt = function() {
 	 .attr("width", function(d) { 
 	     return (x(d.endDate) - x(d.startDate)); 
 	     });
-	 
+
 	 
 	 svg.append("g")
 	 .attr("class", "x axis")
@@ -177,7 +177,7 @@ d3.gantt = function() {
 
     };
 
-    gantt.taskTypes = function(value) {
+    gantt.noteAxisNumbers = function(value) {
 	if (!arguments.length)
 	    return taskTypes;
 	taskTypes = value;

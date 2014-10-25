@@ -32,7 +32,8 @@ function play(file) {
 }
 
 function drawChart() {
-    var taskNames = [];
+    $('.chart').remove();
+    var noteNumbers = [];
 
 
     notes.sort(function(a, b) {
@@ -41,15 +42,14 @@ function drawChart() {
 
 
     for(var i=notes[0].noteNumber; i <= notes[notes.length-1].noteNumber; i++) {
-        taskNames.push(i);
+        noteNumbers.push(i);
     };
 
-    now = new Date();
 
     for(note in notes) {
         tasks.push({
-            startDate: new Date(notes[note].start_time),
-            endDate: new Date(notes[note].end_time),
+            startDate: notes[note].start_time,
+            endDate: notes[note].end_time,
             taskName: notes[note].noteNumber,
             status:"note-"+notes[note].noteNumber
         });
@@ -67,8 +67,12 @@ function drawChart() {
 
     var format = "%H:%M";
 
-    var gantt = d3.gantt().taskTypes(taskNames).tickFormat(format);
-    gantt(tasks);
+    var gantt = d3.gantt().noteAxisNumbers(noteNumbers).tickFormat(format);
+    first_half = tasks.slice(0, tasks.length/2);
+    second_half = tasks.slice(tasks.length/2, tasks.length-1);
+    gantt(first_half);
+    setTimeout(function()
+    { gantt.redraw(second_half); }, 5000);
 }
 $(document).ready(function() {
 
