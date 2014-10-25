@@ -32,13 +32,6 @@ function play(file) {
 }
 
 function drawChart() {
-    var taskStatus = {
-        "SUCCEEDED" : "bar",
-        "FAILED" : "bar-failed",
-        "RUNNING" : "bar-running",
-        "KILLED" : "bar-killed"
-    };
-
     var taskNames = [];
 
 
@@ -58,12 +51,11 @@ function drawChart() {
             startDate: new Date(notes[note].start_time),
             endDate: new Date(notes[note].end_time),
             taskName: notes[note].noteNumber,
-            status:"RUNNING"
+            status:"note-"+notes[note].noteNumber
         });
 
     }
 
-    console.log(tasks);
     tasks.sort(function(a, b) {
         return a.endDate - b.endDate;
     });
@@ -75,7 +67,7 @@ function drawChart() {
 
     var format = "%H:%M";
 
-    var gantt = d3.gantt().taskTypes(taskNames).taskStatus(taskStatus).tickFormat(format);
+    var gantt = d3.gantt().taskTypes(taskNames).tickFormat(format);
     gantt(tasks);
 }
 $(document).ready(function() {
