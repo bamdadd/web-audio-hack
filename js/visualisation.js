@@ -1,4 +1,4 @@
-var tasks = [];
+var notesToVisualise = [];
 
 function loadRemote(path, callback) {
     var fetch = new XMLHttpRequest();
@@ -46,30 +46,29 @@ function drawChart() {
     };
 
 
-    for(note in notes) {
-        tasks.push({
-            startDate: notes[note].start_time,
-            endDate: notes[note].end_time,
-            taskName: notes[note].noteNumber,
-            status:"note-"+notes[note].noteNumber
-        });
-
-    }
-
-    tasks.sort(function(a, b) {
-        return a.endDate - b.endDate;
+    _.each(notes, function(note) {
+        notesToVisualise.push({
+            startTime: note.start_time,
+            endTime: note.end_time,
+            noteNumber: note.noteNumber,
+            status:"note-"+note.noteNumber
+        })
     });
-    var maxDate = tasks[tasks.length - 1].endDate;
-    tasks.sort(function(a, b) {
-        return a.startDate - b.startDate;
+
+    notesToVisualise.sort(function(a, b) {
+        return a.endTime - b.endTime;
     });
-    var minDate = tasks[0].startDate;
+    var maxDate = notesToVisualise[notesToVisualise.length - 1].endTime;
+    notesToVisualise.sort(function(a, b) {
+        return a.startTime - b.startTime;
+    });
+    var minDate = notesToVisualise[0].startTime;
 
     var format = "%H:%M";
 
     var gantt = d3.gantt().noteAxisNumbers(noteNumbers).tickFormat(format);
-    first_half = tasks.slice(0, tasks.length/2);
-    second_half = tasks.slice(tasks.length/2, tasks.length-1);
+    first_half = notesToVisualise.slice(0, notesToVisualise.length/2);
+    second_half = notesToVisualise.slice(notesToVisualise.length/2, notesToVisualise.length-1);
     gantt(first_half);
     setTimeout(function()
     { gantt.redraw(second_half); }, 5000);

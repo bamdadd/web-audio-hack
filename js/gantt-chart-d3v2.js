@@ -13,8 +13,6 @@ d3.gantt = function() {
 	bottom : 20,
 	left : 150
     };
-    var timeDomainStart = d3.time.day.offset(new Date(),-3);
-    var timeDomainEnd = d3.time.hour.offset(new Date(),+3);
     var timeDomainMode = FIT_TIME_DOMAIN_MODE;// fixed or fit
     var taskTypes = [];
     var height = document.body.clientHeight - margin.top - margin.bottom-5;
@@ -23,14 +21,14 @@ d3.gantt = function() {
     var tickFormat = "%H:%M";
 
     var keyFunction = function(d) {
-	return d.startDate + d.taskName + d.endDate;
+	return d.startTime + d.noteNumber + d.endTime;
     };
 
     var rectTransform = function(d) {
-	return "translate(" + x(d.startDate) + "," + y(d.taskName) + ")";
+	return "translate(" + x(d.startTime) + "," + y(d.noteNumber) + ")";
     };
 
-    var x = d3.time.scale().domain([ 0, timeDomainEnd ]).range([ 0, width ]).clamp(true);
+    var x = d3.time.scale().domain([ 0, notes[notes.length-1].endTime ]).range([ 0, width ]).clamp(true);
 
     var y = d3.scale.ordinal().domain(taskTypes).rangeRoundBands([ 0, height - margin.top - margin.bottom ], .1);
     
@@ -41,19 +39,17 @@ d3.gantt = function() {
 
     var initTimeDomain = function() {
 	if (timeDomainMode === FIT_TIME_DOMAIN_MODE) {
-	    if (tasks === undefined || tasks.length < 1) {
-		timeDomainStart = d3.time.day.offset(new Date(), -3);
-		timeDomainEnd = d3.time.hour.offset(new Date(), +3);
+	    if (notesToVisualise === undefined || notesToVisualise.length < 1) {
 		return;
 	    }
-	    tasks.sort(function(a, b) {
-		return a.endDate - b.endDate;
+	    notesToVisualise.sort(function(a, b) {
+		return a.endTime - b.endTime;
 	    });
-	    timeDomainEnd = tasks[tasks.length - 1].endDate;
-	    tasks.sort(function(a, b) {
-		return a.startDate - b.startDate;
+	    timeDomainEnd = notesToVisualise[notesToVisualise.length - 1].endTime;
+	    notesToVisualise.sort(function(a, b) {
+		return a.startTime - b.startTime;
 	    });
-	    timeDomainStart = tasks[0].startDate;
+	    timeDomainStart = notesToVisualise[0].startTime;
 	}
     };
 
@@ -94,7 +90,7 @@ d3.gantt = function() {
 	 .attr("transform", rectTransform)
 	 .attr("height", function(d) { return y.rangeBand(); })
 	 .attr("width", function(d) { 
-	     return (x(d.endDate) - x(d.startDate)); 
+	     return (x(d.endTime) - x(d.startTime));
 	     });
 
 	 
@@ -132,14 +128,14 @@ d3.gantt = function() {
 	 .attr("transform", rectTransform)
 	 .attr("height", function(d) { return y.rangeBand(); })
 	 .attr("width", function(d) { 
-	     return (x(d.endDate) - x(d.startDate)); 
+	     return (x(d.endTime) - x(d.startTime));
 	     });
 
         rect.transition()
           .attr("transform", rectTransform)
 	 .attr("height", function(d) { return y.rangeBand(); })
 	 .attr("width", function(d) { 
-	     return (x(d.endDate) - x(d.startDate)); 
+	     return (x(d.endTime) - x(d.startTime));
 	     });
         
 	rect.exit().remove();
