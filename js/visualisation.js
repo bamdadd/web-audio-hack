@@ -78,10 +78,7 @@ function drawChart() {
     var gantt = d3.gantt().taskTypes(taskNames).taskStatus(taskStatus).tickFormat(format);
     gantt(tasks);
 }
-
-
 $(document).ready(function() {
-
 
     if(FileReader){
         function cancelEvent(e){
