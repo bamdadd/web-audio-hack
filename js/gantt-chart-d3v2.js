@@ -62,7 +62,7 @@ d3.gantt = function() {
 	yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
     };
 
-    function gantt(tasks) {
+    function gantt(notes) {
 	
 	initTimeDomain();
 	initAxis();
@@ -79,7 +79,7 @@ d3.gantt = function() {
 	.attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
 	
       svg.selectAll(".chart")
-	 .data(tasks, keyFunction).enter()
+	 .data(notes, keyFunction).enter()
 	 .append("rect")
 	 .attr("rx", 5)
          .attr("ry", 5)
@@ -106,7 +106,7 @@ d3.gantt = function() {
 
     };
     
-    gantt.redraw = function(tasks) {
+    gantt.redraw = function(notes) {
 
 	initTimeDomain();
 	initAxis();
@@ -114,7 +114,7 @@ d3.gantt = function() {
         var svg = d3.select("svg");
 
         var ganttChartGroup = svg.select(".gantt-chart");
-        var rect = ganttChartGroup.selectAll("rect").data(tasks, keyFunction);
+        var rect = ganttChartGroup.selectAll("rect").data(notes, keyFunction);
         
         rect.enter()
          .insert("rect",":first-child")
