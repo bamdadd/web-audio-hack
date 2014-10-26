@@ -31,7 +31,7 @@ function Game(notes, keyboard){
             updateScore();
             note_index++;
             if(note_index == (notes_to_play.length)) {
-                // keyboard.disable();
+                keyboard.disable();
                 endGame();
                 showDialog('<p>You Won!!!<br/>Whoohoo. </p><p>Enter you name below to upload your score:<br/></p>');
             }
@@ -40,7 +40,7 @@ function Game(notes, keyboard){
             mistakes++;
             updateMistakes();
             if (mistakes > 4 ){
-                // keyboard.disable();
+                keyboard.disable();
                 endGame();
                 showDialog('<p>You made 5 mistakes.<br/> </p><p>Enter your name and upload your high score to see who plays better between your friends and try again.<br/></p>');
             }
@@ -77,6 +77,8 @@ function Game(notes, keyboard){
     };
     endGame();
 
+    var noteArray = ['C', 'C#/Db', 'D', 'D#/Eb','E','F', 'F#/Gb','G', 'G#/Ab', 'A', 'A#/Bb', 'B'];
+
     var startGame = function() {
 
         endGame();
@@ -89,8 +91,9 @@ function Game(notes, keyboard){
         });
 
 
-        for (var i = 0; i <notes.length; i++) {
-            noteNumbers.push(notes[i].noteName);
+
+        for (var i = notes[0].noteNumber; i <=notes[notes.length-1].noteNumber; i++) {
+            noteNumbers.push(noteArray[i % 12] + " - " + Math.floor(i/12));
         };
 
 
