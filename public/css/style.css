@@ -16,6 +16,10 @@ html,body,#wrapper {
 
 }
 
+
+.separator {
+    border-left:1px solid #e2e2e2;
+}
 .share{
     bottom: 0;
 }
