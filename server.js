@@ -7,14 +7,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
 
-var scoreMap = {'Bamdad': 25};
+var scoreMap = {};
 
 app.get('/stats', function (req, res) {
     res.json(scoreMap);
 })
 
 app.post('/stat', function (req, res) {
-    console.log(req.body);
+    name = req.body.name;
+    score = req.body.score;
+    scoreMap[name] = score;
+
     res.send('updated');
 })
 

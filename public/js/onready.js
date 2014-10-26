@@ -23,4 +23,14 @@ $(document).ready(function() {
         cancelEvent(e);
         }, false);
     }
+
+    $.get('/stats', {}, function(d){
+        updateStats(d);
+    })
+
+    function updateStats(data){
+        for(record in data){
+            $('#stats').append(record+ ":" +data[record]);
+        }
+    }
 });
