@@ -126,7 +126,10 @@ function Game(notes, keyboard){
             gantt.redraw(notesToVisualise);
             setTimeout(function () {
                 if(!gantt.atEnd() && gameActive) move();
-                else endGame();
+                else {
+                    endGame();
+                    showDialog('<p>Boo, you didn\'t finish!!<br/></p><p>Enter you name below to upload your score:<br/></p>');
+                }
             }, 33);
         }
 
