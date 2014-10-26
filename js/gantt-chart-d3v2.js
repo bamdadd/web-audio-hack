@@ -31,9 +31,11 @@ d3.gantt = function() {
     var x;
     var y;
 
+    var i = 0;
     var initAxis = function() {
-        x = d3.time.scale().domain([ timeDomainStart, timeDomainEnd ]).range([ 0, width ]).clamp(true);
+        x = d3.time.scale().domain([ i, i+1000 ]).range([ 0, width ]).clamp(true);
         y = d3.scale.ordinal().domain(taskTypes).rangeRoundBands([ 0, height - margin.top - margin.bottom ], .1);
+   		i+=10;
     };
     var initTimeDomain = function() {
 	if (timeDomainMode === FIT_TIME_DOMAIN_MODE) {
@@ -106,7 +108,7 @@ d3.gantt = function() {
 	 .attr("class", function(d){
 	     return d.status;
 	     }) 
-	 .transition()
+	 // .transition()
 	 .attr("y", 0)
 	 .attr("transform", rectTransform)
 	 .attr("height", function(d) { return y.rangeBand(); })
@@ -114,7 +116,7 @@ d3.gantt = function() {
 	     return (x(d.endTime) - x(d.startTime));
 	     });
 
-        rect.transition()
+        rect
           .attr("transform", rectTransform)
 	 .attr("height", function(d) { return y.rangeBand(); })
 	 .attr("width", function(d) { 
@@ -123,8 +125,8 @@ d3.gantt = function() {
         
 	rect.exit().remove();
 
-	svg.select(".x").transition();
-	svg.select(".y").transition();
+	// svg.select(".x").transition();
+	// svg.select(".y").transition();
 	
 	return gantt;
     };

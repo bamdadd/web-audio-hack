@@ -3,6 +3,7 @@ var notesToVisualise = [];
 var keyboard = Keyboard(document);
 var mono = MonoSynth(keyboard, 1);
 
+var gantt;
 function drawChart() {
     $('.chart').remove();
 
@@ -39,16 +40,24 @@ function drawChart() {
 
     var format = "%H:%M";
 
-    var gantt = d3.gantt().noteAxisNumbers(noteNumbers).tickFormat(format);
+    gantt = d3.gantt().noteAxisNumbers(noteNumbers).tickFormat(format);
 
-    first_half = notesToVisualise.slice(0, notesToVisualise.length / 2);
-    second_half = notesToVisualise.slice(notesToVisualise.length / 2, notesToVisualise.length - 1);
+    // first_half = notesToVisualise.slice(0, notesToVisualise.length / 2);
+    // second_half = notesToVisualise.slice(notesToVisualise.length / 2, notesToVisualise.length - 1);
 
-    gantt(first_half);
+    gantt(notesToVisualise);
 
-    setTimeout(function () {
-        gantt.redraw(second_half);
-    }, 5000);
+    var i = 0;
+    var move = function() {
+        console.log("redraw");
+        gantt.redraw(notesToVisualise);
+        setTimeout(function () {
+            if(i<1000) move();
+        }, 33);
+    }
+
+    move();
+
 }
 
 
