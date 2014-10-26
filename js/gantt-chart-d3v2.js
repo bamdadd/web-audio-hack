@@ -25,7 +25,7 @@ d3.gantt = function() {
     };
 
     var rectTransform = function(d) {
-	return "translate(" + x(d.startTime) + "," + y(d.noteNumber) + ")";
+		return "translate(" + x(d.noteNumber) + "," + y(d.startTime) + ")";
     };
 
     var x;
@@ -33,8 +33,8 @@ d3.gantt = function() {
 
     var i = 0;
     var initAxis = function() {
-        x = d3.time.scale().domain([ i, i+1000 ]).range([ 0, width ]).clamp(true);
-        y = d3.scale.ordinal().domain(taskTypes).rangeRoundBands([ 0, height - margin.top - margin.bottom ], .1);
+        y = d3.time.scale().domain([ i, i+1000 ]).range([ 0, height - margin.top - margin.bottom ]).clamp(true);
+        x = d3.scale.ordinal().domain(taskTypes).rangeRoundBands([ 0, width ], .1);
    		i+=10;
     };
     var initTimeDomain = function() {
@@ -79,12 +79,12 @@ d3.gantt = function() {
 	 .attr("class", function(d){ 
 	     return d.status;
 	     }) 
-	 .attr("y", 0)
+	 .attr("x", 0)
 	 .attr("transform", rectTransform)
-	 .attr("height", function(d) { return y.rangeBand(); })
+	 .attr("height", function(d) { return y(d.endTime) - y(d.startTime); })
 	 .attr("width", function(d) { 
-	     return (x(d.endTime) - x(d.startTime));
-	     });
+	     return x.rangeBand();
+	  });
 
 
 	 return gantt;
@@ -111,16 +111,16 @@ d3.gantt = function() {
 	 // .transition()
 	 .attr("y", 0)
 	 .attr("transform", rectTransform)
-	 .attr("height", function(d) { return y.rangeBand(); })
+	 .attr("height", function(d) { return y(d.endTime) - y(d.startTime); })
 	 .attr("width", function(d) { 
-	     return (x(d.endTime) - x(d.startTime));
+	     return x.rangeBand();
 	     });
 
         rect
           .attr("transform", rectTransform)
-	 .attr("height", function(d) { return y.rangeBand(); })
+	 .attr("height", function(d) { return y(d.endTime) - y(d.startTime); })
 	 .attr("width", function(d) { 
-	     return (x(d.endTime) - x(d.startTime));
+	     return x.rangeBand();
 	     });
         
 	rect.exit().remove();
