@@ -10,6 +10,7 @@ function shareScore(){
 
     },function(d){
         console.log(d);
+        location.reload();
     });
 }
 
