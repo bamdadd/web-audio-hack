@@ -8,8 +8,12 @@ $(document).ready(function() {
         play($('select').val());
     });
 
-    $('#start').click(function(){
+    $('#start-game').click(function(){
         start($('select').val());
+    });
+
+    $('#stop-game').click(function(){
+        stop();
     });
 
     if(FileReader){

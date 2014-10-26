@@ -26,6 +26,10 @@ function start(file) {
     }
 }
 
+function stop() {
+    if(typeof game != 'undefined') game.endGame();
+}
+
 function loadRemote(path, callback) {
     var fetch = new XMLHttpRequest();
     fetch.open('GET', path);

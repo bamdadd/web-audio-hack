@@ -24,6 +24,28 @@ function Game(notes, keyboard){
     var mistakes = 0;
     var gameActive = false;
 
+    noteDown = function(note) {
+        if(notes_to_play[note_index] == note){
+            score  = score+10;
+            updateScore();
+            note_index++;
+            if(note_index == (notes_to_play.length)) {
+                // keyboard.disable();
+                endGame();
+                showDialog('<p>You Won!!!<br/>Whoohoo. </p><p>Enter you name below to upload your score:<br/></p>');
+            }
+        }
+        else{
+            mistakes++;
+            updateMistakes();
+            if (mistakes > 4 ){
+                // keyboard.disable();
+                endGame();
+                showDialog('<p>You made 5 mistakes.<br/> </p><p>Enter your name and upload your high score to see who plays better between your friends and try again.<br/></p>');
+            }
+        }
+    };
+
     var showDialog = function (text){
         $('#alert-msg').html(text);
         $('#alert').show()
@@ -43,10 +65,15 @@ function Game(notes, keyboard){
     var endGame = function() {
         $('.chart').remove();
         gameActive = false;
+        mistakes = 0;
+        score = 0;
+        keyboard.removeEventListener("note_down", noteDown);
     };
+    endGame();
 
     var startGame = function() {
 
+        endGame();
         notesToVisualise = [];
 
         var noteNumbers = [];
@@ -99,30 +126,9 @@ function Game(notes, keyboard){
         }
 
         move();
+
+        keyboard.addEventListener('note_down', noteDown);
     };
-
-
-    keyboard.addEventListener('note_down', function(note){
-        if(notes_to_play[note_index] == note){
-            score  = score+10;
-            updateScore();
-            note_index++;
-            if(note_index == (notes_to_play.length)) {
-                keyboard.disable();
-                endGame();
-                showDialog('<p>You Won!!!<br/>Whoohoo. </p><p>Enter you name below to upload your score:<br/></p>');
-            }
-        }
-        else{
-            mistakes++;
-            updateMistakes();
-            if (mistakes > 4 ){
-                keyboard.disable();
-                endGame();
-                showDialog('<p>You made 5 mistakes.<br/> </p><p>Enter your name and upload your high score to see who plays better between your friends and try again.<br/></p>');
-            }
-        }
-    })
 
     return {
         startGame: startGame,

@@ -69,6 +69,11 @@ function Keyboard(element) {
 				listeners[noteEvent].push(callback);
 			}
 		},
+		removeEventListener: function(noteEvent, listener) {
+			if(listeners[noteEvent].indexOf(listener)!=-1) {
+				listeners[noteEvent].splice(listeners[noteEvent].indexOf(listener), 1);
+			}
+		},
 		disable: function() {
 			enabled = false;
 		},
