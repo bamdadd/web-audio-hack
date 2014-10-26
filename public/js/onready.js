@@ -37,4 +37,13 @@ $(document).ready(function() {
             $('#stats').append(record+ ":" +data[record]+"</br>");
         }
     }
+
+    $('#join').click(function(){
+        socket.emit('join');
+    })
+
+    socket.on('midi-file', function(midiFile){
+        console.log(midiFile);
+        start(midiFile);
+    })
 });

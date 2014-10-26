@@ -1,5 +1,8 @@
-var express = require('express');
+var express= require('express');
 var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+var totalPlayers = 0;
 
 var bodyParser = require('body-parser');
 
@@ -21,11 +24,23 @@ app.post('/stat', function (req, res) {
     res.send('updated');
 })
 
+io.on('connection', function(socket){
+    console.log('a user connected');
+    socket.on('join', function(msg){
+        console.log('someone joined');
+        totalPlayers++;
+        if(totalPlayers >= 2){
+            io.emit('midi-file', 'whistle.mid');
+        }
+    });
+
+});
+
 
 app.use(express.static('public'));
 
 
-var server = app.listen(8888, function () {
+var server = http.listen(8888, function () {
 
     var host = server.address().address;
     var port = server.address().port;
