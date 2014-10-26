@@ -52,6 +52,11 @@ function Game(notes, keyboard){
         $('#submit-score').text($('#score').text());
     }
 
+    var hideDialog = function() {
+        $('#alert').hide();
+    }
+    hideDialog();
+
     var updateScore= function(){
         $('#score').text(score);
     }
