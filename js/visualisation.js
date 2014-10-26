@@ -4,13 +4,17 @@ var keyboard = Keyboard(document);
 var mono = MonoSynth(keyboard, 1);
 
 function Game(notes, keyboard){
-    console.log(notes);
     var notes_to_play = (_.map(notes, function(i){
         return i.noteNumber}));
     var notes_played = [];
     var note_index = 0;
     var score = 0;
     var mistakes = 0;
+
+    var showDialog = function (text){
+        $('#alert-msg').text(text);
+        $('#alert').show()
+    }
 
     var updateScore= function(){
         $('#score').text(score);
@@ -20,20 +24,19 @@ function Game(notes, keyboard){
     }
     console.log(notes_to_play);
     keyboard.addEventListener('note_down', function(note){
-        console.log(note);
         if(notes_to_play[note_index] == note){
             score  = score+10;
             updateScore();
             note_index++;
             if(note_index == (notes_to_play.length)) {
-                alert('You Won!!!!');
+                showDialog('You Won!!!Whoohoo. Enter you name below to upload your score:');
             }
         }
         else{
             mistakes++;
             updateMistakes();
             if (mistakes > 4 ){
-            alert('You suck at this game');
+            showDialog('You made 5 mistakes. Enter your name and upload your high score to see who plays better between your friends and try again.');
 
             }
         }

@@ -15,6 +15,24 @@ html,body,#wrapper {
     font-weight: bold;
     background-color: darkgray;
 }
+a {
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+}
+#alert{
+    display: none;
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    top: 150px;
+    left: 150px;
+    background: skyblue;
+    color: #000000;
+    font-family: verdana, arial, helvetica, sans-serif;
+    text-align: center;
+    padding-top:20px;
+    font-size:xx-large;
+}
 
 #score{
    font-size:large;
