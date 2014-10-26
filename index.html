@@ -25,15 +25,26 @@
         <div id="alert">
             <div id="alert-msg"></div>
         </div>
-		<input type=range min=1 max=20 value=10 id=fader>
-		<a href="javascript:void(play('minute_waltz.mid'))">Chopin - Waltz Op.61 (Minute Waltz)</a> |
-		<a href="javascript:void(play('rachmaninov3.mid'))">Rachmaninov - Piano Concerto No.3 (First movement)</a> |
-		<a href="javascript:void(play('simple.mid'))">simple</a> |
-		<a href="javascript:void(play('overlap.mid'))">overlap</a> |
-		<a href="javascript:void(play('long.mid'))">long</a> |
- 		<a href="javascript:void(play('mario.mid'))">mario</a> |
-		<a href="javascript:void(play('ode_to_joy.mid'))">ode to joy</a> |
-		<a href="javascript:void(play('whistle.mid'))">whistle</a> |
+		Tempo <input type=range min=1 max=20 value=10 id=fader>
+
+		Load Song 
+
+		<select>
+			<option value="">Select</option>
+			<option value="minute_waltz.mid">Waltz</option>
+			<option value="rachmaninov3.mid">Rachmaninov</option>
+			<option value="simple.mid">Simple</option>
+			<option value="overlap.mid">Overlap</option>
+			<option value="long.mid">Long</option>
+			<option value="mario.mid">Mario</option>
+			<option value="ode_to_joy.mid">Ode to Joy</option>
+			<option value="whistle.mid">Whistle</option>
+		</select>
+
+		<button id="play">Play</button>
+		<button id="stop">Stop</button>
+		<button id="start">Start</button>
+
         <div class="stat">
             <span>Score</span>
             <div id="score">0</div>

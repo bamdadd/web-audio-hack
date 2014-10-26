@@ -47,6 +47,8 @@ var gantt;
 function drawChart() {
     $('.chart').remove();
 
+    notesToVisualise = [];
+
     var noteNumbers = [];
 
     Game(notes, keyboard);
@@ -89,11 +91,11 @@ function drawChart() {
     gantt(notesToVisualise);
     
 
-    var i = 0;
+    rollNotes = true;
     var move = function() {
         gantt.redraw(notesToVisualise);
         setTimeout(function () {
-            if(!gantt.atEnd()) move();
+            if(!gantt.atEnd() && rollNotes) move();
             else console.log("stop");
         }, 33);
     }

@@ -1,5 +1,17 @@
 $(document).ready(function() {
 
+    $('#stop').click(function() {
+        if(typeof audio != 'undefined') audio.stop();
+    });
+
+    $('#play').click(function() {
+        play($('select').val());
+    });
+
+    $('#start').click(function(){
+        start($('select').val());
+    });
+
     if(FileReader){
         function cancelEvent(e){
             e.stopPropagation();

@@ -34,10 +34,15 @@ d3.gantt = function() {
 
     var i = 0;
     var windowSize = 1000;
+	var xAxis;
+
     var initAxis = function() {
         y = d3.time.scale().domain([ i, i+windowSize ]).range([ 0, height - margin.top - margin.bottom ]).clamp(true);
         x = d3.scale.ordinal().domain(taskTypes).rangeRoundBands([ 0, width ], .1);
+        xAxis = d3.svg.axis().scale(x).orient("top").tickSize(0);
+		
    		i+=parseInt($('#fader').val());
+
     };
     var initTimeDomain = function() {
 	if (timeDomainMode === FIT_TIME_DOMAIN_MODE) {
@@ -88,6 +93,11 @@ d3.gantt = function() {
 	     return x.rangeBand();
 	  });
 
+	 svg.append("g")
+	 .attr("class", "x axis")
+	 // .attr("transform", "translate(0, " + (height - margin.top - margin.bottom) + ")")
+	 .transition()
+	 .call(xAxis);
 
 	 return gantt;
 

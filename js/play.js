@@ -1,12 +1,28 @@
+var audio;
+var rollNotes = false;
+
 function play(file) {
-    loadRemote(file, function(data) {
-        midiFile = MidiFile(data);
-        visualiser = Visualiser(midiFile);
-        drawChart();
-        synth = Synth(44100);
-        replayer = Replayer(midiFile, synth);
-        audio = AudioPlayer(replayer);
-    })
+    if(file != "") {
+        loadRemote(file, function(data) {
+            midiFile = MidiFile(data);
+            // visualiser = Visualiser(midiFile);
+            // drawChart();
+            synth = Synth(44100);
+            replayer = Replayer(midiFile, synth);
+            audio = AudioPlayer(replayer);
+        })
+    }
+}
+
+function start(file) {
+    rollNotes = false;
+    if(file != "") {
+        loadRemote(file, function(data) {
+            midiFile = MidiFile(data);
+            visualiser = Visualiser(midiFile);
+            drawChart();
+        })
+    }
 }
 
 function loadRemote(path, callback) {
