@@ -1,5 +1,5 @@
 var audio;
-var rollNotes = false;
+var game;
 
 function play(file) {
     if(file != "") {
@@ -15,12 +15,13 @@ function play(file) {
 }
 
 function start(file) {
-    rollNotes = false;
+    if(typeof game != 'undefined') game.endGame();
     if(file != "") {
         loadRemote(file, function(data) {
             midiFile = MidiFile(data);
             visualiser = Visualiser(midiFile);
-            drawChart();
+            game = Game(notes, keyboard);
+            game.startGame();
         })
     }
 }

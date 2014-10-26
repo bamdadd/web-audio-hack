@@ -1,5 +1,6 @@
 function Keyboard(element) {
 
+	var enabled = true;
 	var octave = 6;
 	var noteMap = {
 		65: 0,
@@ -20,6 +21,7 @@ function Keyboard(element) {
 	var listeners = {'note_up': [], 'note_down': []};
 
 	element.addEventListener('keydown', function(event) {
+		if(!enabled) return;
 	    if(event.keyCode == 38) {
 	        incrementOctave();
 	    }
@@ -63,10 +65,16 @@ function Keyboard(element) {
 
 	return {
 		addEventListener: function(noteEvent, callback) {
-		if(noteEvent in listeners) {
-			listeners[noteEvent].push(callback);
+			if(noteEvent in listeners) {
+				listeners[noteEvent].push(callback);
+			}
+		},
+		disable: function() {
+			enabled = false;
+		},
+		enable: function() {
+			enabled = true;
 		}
-	}
 	}
 
 }
