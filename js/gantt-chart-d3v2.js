@@ -28,15 +28,13 @@ d3.gantt = function() {
 	return "translate(" + x(d.startTime) + "," + y(d.noteNumber) + ")";
     };
 
-    var x = d3.time.scale().domain([ 0, notes[notes.length-1].endTime ]).range([ 0, width ]).clamp(true);
+    var x;
+    var y;
 
-    var y = d3.scale.ordinal().domain(taskTypes).rangeRoundBands([ 0, height - margin.top - margin.bottom ], .1);
-    
-    var xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(d3.time.format(tickFormat)).tickSubdivide(true)
-	    .tickSize(8).tickPadding(8);
-
-    var yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
-
+    var initAxis = function() {
+        x = d3.time.scale().domain([ timeDomainStart, timeDomainEnd ]).range([ 0, width ]).clamp(true);
+        y = d3.scale.ordinal().domain(taskTypes).rangeRoundBands([ 0, height - margin.top - margin.bottom ], .1);
+    };
     var initTimeDomain = function() {
 	if (timeDomainMode === FIT_TIME_DOMAIN_MODE) {
 	    if (notesToVisualise === undefined || notesToVisualise.length < 1) {
@@ -53,14 +51,7 @@ d3.gantt = function() {
 	}
     };
 
-    var initAxis = function() {
-	x = d3.time.scale().domain([ timeDomainStart, timeDomainEnd ]).range([ 0, width ]).clamp(true);
-	y = d3.scale.ordinal().domain(taskTypes).rangeRoundBands([ 0, height - margin.top - margin.bottom ], .1);
-	xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(d3.time.format(tickFormat)).tickSubdivide(true)
-		.tickSize(8).tickPadding(8);
 
-	yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
-    };
 
     function gantt(notes) {
 	
@@ -93,15 +84,7 @@ d3.gantt = function() {
 	     return (x(d.endTime) - x(d.startTime));
 	     });
 
-	 
-	 svg.append("g")
-	 .attr("class", "x axis")
-	 .attr("transform", "translate(0, " + (height - margin.top - margin.bottom) + ")")
-	 .transition()
-	 .call(xAxis);
-	 
-	 svg.append("g").attr("class", "y axis").transition().call(yAxis);
-	 
+
 	 return gantt;
 
     };
@@ -140,8 +123,8 @@ d3.gantt = function() {
         
 	rect.exit().remove();
 
-	svg.select(".x").transition().call(xAxis);
-	svg.select(".y").transition().call(yAxis);
+	svg.select(".x").transition();
+	svg.select(".y").transition();
 	
 	return gantt;
     };

@@ -41,14 +41,14 @@ function drawChart() {
 
     var gantt = d3.gantt().noteAxisNumbers(noteNumbers).tickFormat(format);
 
-//    first_half = notesToVisualise.slice(0, notesToVisualise.length / 2);
-//    second_half = notesToVisualise.slice(notesToVisualise.length / 2, notesToVisualise.length - 1);
+    first_half = notesToVisualise.slice(0, notesToVisualise.length / 2);
+    second_half = notesToVisualise.slice(notesToVisualise.length / 2, notesToVisualise.length - 1);
 
-    gantt(notesToVisualise);
+    gantt(first_half);
 
-//    setTimeout(function () {
-//        gantt.redraw(second_half);
-//    }, 5000);
+    setTimeout(function () {
+        gantt.redraw(second_half);
+    }, 5000);
 }
 
 
