@@ -9,7 +9,7 @@ d3.gantt = function() {
     
     var margin = {
 	top : 20,
-	right : 40,
+	right : 100,
 	bottom : 20,
 	left : 150
     };

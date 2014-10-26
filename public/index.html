@@ -1,64 +1,69 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<link type="text/css" href="../css/gantt.css" rel="stylesheet" />
-		<link type="text/css" href="../css/style.css" rel="stylesheet" />
-		<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<head>
+    <link type="text/css" href="/css/gantt.css" rel="stylesheet"/>
+    <link type="text/css" href="/css/style.css" rel="stylesheet"/>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
-		<script src="../js/underscore-min.js"></script>
-		<script src="stream.js"></script>
-		<script src="midifile.js"></script>
-		<script src="visualiser.js"></script>
-		<script src="replayer.js"></script>
-		<script src="synth.js"></script>
-		<script src="audio.js"></script>
-		<script src="../js/keyboard.js"></script>
-		<script src="../js/monosynth.js"></script>
-		<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
-		<script type="text/javascript" src="../js/gantt-chart-d3v2.js"></script>
-		<script type="text/javascript" src="../js/visualisation.js"></script>
-		<script type="text/javascript" src="../js/play.js"></script>
-		<script type="text/javascript" src="../js/onready.js"></script>
+    <script src="/js/underscore-min.js"></script>
+    <script src="stream.js"></script>
+    <script src="midifile.js"></script>
+    <script src="visualiser.js"></script>
+    <script src="replayer.js"></script>
+    <script src="synth.js"></script>
+    <script src="audio.js"></script>
+    <script src="/js/keyboard.js"></script>
+    <script src="/js/monosynth.js"></script>
+    <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+    <script type="text/javascript" src="/js/gantt-chart-d3v2.js"></script>
+    <script type="text/javascript" src="/js/visualisation.js"></script>
+    <script type="text/javascript" src="/js/play.js"></script>
+    <script type="text/javascript" src="/js/onready.js"></script>
 
-	</head>
-	<body>
-        <div id="alert">
-            <div id="alert-msg"></div>
-            <label>Name: </label>
-            <input type="text" class="name"/>
-            <label>Score: </label>
-            <div id="submit-score"></div>
-            <button type="submit" onclick="shareScore()">Share your score</button>
+</head>
+<body>
+<div id="alert">
+    <div id="alert-msg"></div>
+    <label>Name: </label>
+    <input type="text" class="name"/>
+    <label>Score: </label>
 
-        </div>
-		Tempo <input type=range min=1 max=20 value=10 id=fader>
+    <div id="submit-score"></div>
+    <button type="submit" onclick="shareScore()">Share your score</button>
 
-		Load Song 
+</div>
+<div class="navigation">
+    Speed <input type=range min=1 max=20 value=10 id=fader>
 
-		<select>
-			<option value="">Select</option>
-			<option value="minute_waltz.mid">Waltz</option>
-			<option value="rachmaninov3.mid">Rachmaninov</option>
-            <option value="mond_1.mid">Sonata (Moonlight)</option>>
-			<option value="simple.mid">Simple</option>
-			<option value="overlap.mid">Overlap</option>
-			<option value="long.mid">Long</option>
-			<option value="mario.mid">Mario</option>
-			<option value="ode_to_joy.mid">Ode to Joy</option>
-			<option value="whistle.mid">Whistle</option>
-		</select>
+    Select Song
 
-		<button id="play">Play Music</button>
-		<button id="stop">Stop Music</button>
-		<button id="start">Start Playing</button>
+    <select>
+        <option value="">Select</option>
+        <option value="minute_waltz.mid">Waltz</option>
+        <option value="rachmaninov3.mid">Rachmaninov</option>
+        <option value="mond_1.mid">Sonata (Moonlight)</option>
+        >
+        <option value="simple.mid">Simple</option>
+        <option value="overlap.mid">Overlap</option>
+        <option value="long.mid">Long</option>
+        <option value="mario.mid">Mario</option>
+        <option value="ode_to_joy.mid">Ode to Joy</option>
+        <option value="whistle.mid">Whistle</option>
+    </select>
 
-        <div class="stat">
-            <div>Score</div>
-            <div id="score">0</div>
-            <div>Mistakes</div>
-            <div id="mistakes">0/5</div>
-            <div id="stats">---------<br>  Stats<br>---------
-            </div>
-        </div>
-	</body>
+    <button id="play">Play Music</button>
+    <button id="stop">Stop Music</button>
+    <button id="start">Start Game</button>
+</div>
+
+
+<div class="stat">
+    <div>Score</div>
+    <div id="score">0</div>
+    <div>Mistakes</div>
+    <div id="mistakes">0/5</div>
+    <div id="stats">---------<br> Stats<br>---------
+    </div>
+</div>
+</body>
 </html>

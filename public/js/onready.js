@@ -30,7 +30,7 @@ $(document).ready(function() {
 
     function updateStats(data){
         for(record in data){
-            $('#stats').append(record+ ":" +data[record]);
+            $('#stats').append(record+ ":" +data[record]+"</br>");
         }
     }
 });

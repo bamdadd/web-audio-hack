@@ -4,9 +4,21 @@ html,body,#wrapper {
     margin: 0px;
 }
 
+.navigation {
+    background-color: #2B2B2B;
+    width: 150px;
+    left:0;
+    top:0;
+    position: absolute;
+    height: 100%;
+    color: white;
+    text-align: center;
+
+}
+
 .stat{
     position: absolute;
-    width: 80px;
+    width: 100px;
     top: 0;
     right: 0;
     float: right;
@@ -14,6 +26,7 @@ html,body,#wrapper {
     font-family: verdana, arial, helvetica, sans-serif;
     font-weight: bold;
     background-color: darkgray;
+    height: 100%;
 }
 a {
     font-family: verdana, arial, helvetica, sans-serif;
@@ -24,8 +37,8 @@ a {
     position: absolute;
     width: 70%;
     height: 70%;
-    top: 150px;
-    left: 150px;
+    top: 50px;
+    left: 250px;
     background: skyblue;
     color: #000000;
     font-family: verdana, arial, helvetica, sans-serif;
