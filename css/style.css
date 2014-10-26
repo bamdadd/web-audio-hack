@@ -4,6 +4,19 @@ html,body,#wrapper {
     margin: 0px;
 }
 
+.stat{
+    width: 50px;
+    top: 10;
+    float: right;
+    text-align: center;
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-weight: bold;
+}
+
+#score{
+   font-size:large;
+   color: orange;
+}
 .chart {
     font-family: Arial, sans-serif;
     font-size: 12px;
