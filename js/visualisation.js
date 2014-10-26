@@ -3,6 +3,16 @@ var notesToVisualise = [];
 var keyboard = Keyboard(document);
 var mono = MonoSynth(keyboard, 1);
 
+function shareScore(){
+    $.post('http://localhost:8888/stat',{
+        name: $('.name').text(),
+        score: $('#score').text()
+
+    },function(d){
+        console.log(d);
+    });
+}
+
 function Game(notes, keyboard){
     var notes_to_play = (_.map(notes, function(i){
         return i.noteNumber}));
@@ -12,8 +22,9 @@ function Game(notes, keyboard){
     var mistakes = 0;
 
     var showDialog = function (text){
-        $('#alert-msg').text(text);
+        $('#alert-msg').html(text);
         $('#alert').show()
+        $('#submit-score').text($('#score').text());
     }
 
     var updateScore= function(){
@@ -22,6 +33,9 @@ function Game(notes, keyboard){
     var updateMistakes= function(){
         $('#mistakes').text(mistakes);
     }
+
+
+
     console.log(notes_to_play);
     keyboard.addEventListener('note_down', function(note){
         if(notes_to_play[note_index] == note){
@@ -29,14 +43,14 @@ function Game(notes, keyboard){
             updateScore();
             note_index++;
             if(note_index == (notes_to_play.length)) {
-                showDialog('You Won!!!Whoohoo. Enter you name below to upload your score:');
+                showDialog('<p>You Won!!!<br/>Whoohoo. </p><p>Enter you name below to upload your score:<br/></p>');
             }
         }
         else{
             mistakes++;
             updateMistakes();
             if (mistakes > 4 ){
-            showDialog('You made 5 mistakes. Enter your name and upload your high score to see who plays better between your friends and try again.');
+            showDialog('<p>You made 5 mistakes.<br/> </p><p>Enter your name and upload your high score to see who plays better between your friends and try again.<br/></p>');
 
             }
         }
@@ -89,7 +103,7 @@ function drawChart() {
     // second_half = notesToVisualise.slice(notesToVisualise.length / 2, notesToVisualise.length - 1);
 
     gantt(notesToVisualise);
-    
+
 
     rollNotes = true;
     var move = function() {

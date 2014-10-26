@@ -24,6 +24,12 @@
 	<body>
         <div id="alert">
             <div id="alert-msg"></div>
+            <label>Name: </label>
+            <input type="text" class="name"/>
+            <label>Score: </label>
+            <div id="submit-score"></div>
+            <button type="submit" onclick="shareScore()">Share your score</button>
+
         </div>
 		Tempo <input type=range min=1 max=20 value=10 id=fader>
 
@@ -33,6 +39,7 @@
 			<option value="">Select</option>
 			<option value="minute_waltz.mid">Waltz</option>
 			<option value="rachmaninov3.mid">Rachmaninov</option>
+            <option value="mond_1.mid'">Sonata (Moonlight)</option>>
 			<option value="simple.mid">Simple</option>
 			<option value="overlap.mid">Overlap</option>
 			<option value="long.mid">Long</option>
@@ -41,14 +48,14 @@
 			<option value="whistle.mid">Whistle</option>
 		</select>
 
-		<button id="play">Play</button>
-		<button id="stop">Stop</button>
-		<button id="start">Start</button>
+		<button id="play">Play Music</button>
+		<button id="stop">Stop Music</button>
+		<button id="start">Start Playing</button>
 
         <div class="stat">
-            <span>Score</span>
+            <div>Score</div>
             <div id="score">0</div>
-            <span>Mistakes</span>
+            <div>Mistakes</div>
             <div id="mistakes">0/5</div>
         </div>
 	</body>
