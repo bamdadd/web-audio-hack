@@ -35,7 +35,7 @@ d3.gantt = function() {
     var yAxis = d3.svg.axis().scale(y).orient("left").tickFormat(d3.time.format(tickFormat)).tickSubdivide(true)
 	    .tickSize(8).tickPadding(8);
 
-    var xAxis = d3.svg.axis().scale(x).orient("bottom").tickSize(0);
+    var xAxis = d3.svg.axis().scale(x).orient("top").tickSize(0);
 
     var initTimeDomain = function() {
 	if (timeDomainMode === FIT_TIME_DOMAIN_MODE) {
@@ -59,7 +59,7 @@ d3.gantt = function() {
 	yAxis = d3.svg.axis().scale(y).orient("left").tickFormat(d3.time.format(tickFormat)).tickSubdivide(true)
 		.tickSize(8).tickPadding(8);
 
-	xAxis = d3.svg.axis().scale(x).orient("bottom").tickSize(0);
+	xAxis = d3.svg.axis().scale(x).orient("top").tickSize(0);
     };
 
     function gantt(notes) {
@@ -96,10 +96,9 @@ d3.gantt = function() {
 	 
 	 svg.append("g")
 	 .attr("class", "x axis")
-	 .attr("transform", "translate(0, " + (height - margin.top - margin.bottom) + ")")
 	 .transition()
 	 .call(xAxis);
-	 
+
 	 svg.append("g").attr("class", "y axis").transition().call(yAxis);
 	 
 	 return gantt;
