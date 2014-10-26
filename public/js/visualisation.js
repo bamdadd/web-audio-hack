@@ -4,7 +4,7 @@ var keyboard = Keyboard(document);
 var mono = MonoSynth(keyboard, 1);
 
 function shareScore(){
-    $.post('http://localhost:8888/stat',{
+    $.post('/stat',{
         name: $('.name').val(),
         score: $('#score').text()
 
