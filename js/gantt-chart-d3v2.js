@@ -30,12 +30,14 @@ d3.gantt = function() {
 
     var x;
     var y;
+    var endTime;
 
     var i = 0;
+    var windowSize = 1000;
     var initAxis = function() {
-        y = d3.time.scale().domain([ i, i+1000 ]).range([ 0, height - margin.top - margin.bottom ]).clamp(true);
+        y = d3.time.scale().domain([ i, i+windowSize ]).range([ 0, height - margin.top - margin.bottom ]).clamp(true);
         x = d3.scale.ordinal().domain(taskTypes).rangeRoundBands([ 0, width ], .1);
-   		i+=10;
+   		i+=parseInt($('#fader').val());
     };
     var initTimeDomain = function() {
 	if (timeDomainMode === FIT_TIME_DOMAIN_MODE) {
@@ -56,7 +58,7 @@ d3.gantt = function() {
 
 
     function gantt(notes) {
-	
+		endTime = notes[notes.length-1].endTime;
 	initTimeDomain();
 	initAxis();
 	
@@ -130,6 +132,10 @@ d3.gantt = function() {
 	
 	return gantt;
     };
+
+    gantt.atEnd = function() {
+    	return i > endTime;
+    }
 
     gantt.margin = function(value) {
 	if (!arguments.length)

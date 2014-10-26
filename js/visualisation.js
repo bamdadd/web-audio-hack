@@ -52,7 +52,8 @@ function drawChart() {
         console.log("redraw");
         gantt.redraw(notesToVisualise);
         setTimeout(function () {
-            if(i<1000) move();
+            if(!gantt.atEnd()) move();
+            else console.log("stop");
         }, 33);
     }
 
