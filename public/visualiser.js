@@ -42,7 +42,7 @@ function Visualiser(midifile, callback){
     var tempo = _.select(midifile.tracks[0], function(e){return e.subtype ==  'setTempo'})[0];
         bpm = Math.round(60000000 / tempo.microsecondsPerBeat);
     _.each(midifile.tracks, function(track){
-        timer = 0
+        timer = 1000;
         events = _.filter(track, function(e){return e.subtype== 'noteOn' || e.subtype == 'noteOff'})
         _.each(events, function(e){
             timer += e.deltaTime;

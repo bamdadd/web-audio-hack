@@ -114,7 +114,6 @@ function drawChart() {
         gantt.redraw(notesToVisualise);
         setTimeout(function () {
             if(!gantt.atEnd() && rollNotes) move();
-            else console.log("stop");
         }, 33);
     }
 
