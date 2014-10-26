@@ -25,17 +25,17 @@ d3.gantt = function() {
     };
 
     var rectTransform = function(d) {
-	return "translate(" + x(d.startTime) + "," + y(d.noteNumber) + ")";
+	return "translate(" + x(d.noteNumber) + "," + y(d.startTime) + ")";
     };
 
-    var x = d3.time.scale().domain([ 0, notes[notes.length-1].endTime ]).range([ 0, width ]).clamp(true);
+    var y = d3.time.scale().domain([ 0, notes[notes.length-1].endTime ]).range([ 0, height - margin.top -margin.bottom]).clamp(true);
 
-    var y = d3.scale.ordinal().domain(taskTypes).rangeRoundBands([ 0, height - margin.top - margin.bottom ], .1);
+    var x = d3.scale.ordinal().domain(taskTypes).rangeRoundBands([ 0, width ], .1);
     
-    var xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(d3.time.format(tickFormat)).tickSubdivide(true)
+    var yAxis = d3.svg.axis().scale(y).orient("left").tickFormat(d3.time.format(tickFormat)).tickSubdivide(true)
 	    .tickSize(8).tickPadding(8);
 
-    var yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
+    var xAxis = d3.svg.axis().scale(x).orient("bottom").tickSize(0);
 
     var initTimeDomain = function() {
 	if (timeDomainMode === FIT_TIME_DOMAIN_MODE) {
@@ -54,12 +54,12 @@ d3.gantt = function() {
     };
 
     var initAxis = function() {
-	x = d3.time.scale().domain([ timeDomainStart, timeDomainEnd ]).range([ 0, width ]).clamp(true);
-	y = d3.scale.ordinal().domain(taskTypes).rangeRoundBands([ 0, height - margin.top - margin.bottom ], .1);
-	xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(d3.time.format(tickFormat)).tickSubdivide(true)
+	y = d3.time.scale().domain([ timeDomainStart, timeDomainEnd ]).range([ 0, height - margin.top - margin.bottom ]).clamp(true);
+	x = d3.scale.ordinal().domain(taskTypes).rangeRoundBands([ 0, width ], .1);
+	yAxis = d3.svg.axis().scale(y).orient("left").tickFormat(d3.time.format(tickFormat)).tickSubdivide(true)
 		.tickSize(8).tickPadding(8);
 
-	yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
+	xAxis = d3.svg.axis().scale(x).orient("bottom").tickSize(0);
     };
 
     function gantt(notes) {
@@ -86,11 +86,11 @@ d3.gantt = function() {
 	 .attr("class", function(d){ 
 	     return d.status;
 	     }) 
-	 .attr("y", 0)
+	 .attr("x", 0)
 	 .attr("transform", rectTransform)
-	 .attr("height", function(d) { return y.rangeBand(); })
+	 .attr("height", function(d) { return y(d.endTime) - y(d.startTime); })
 	 .attr("width", function(d) { 
-	     return (x(d.endTime) - x(d.startTime));
+	     return  x.rangeBand();
 	     });
 
 	 
