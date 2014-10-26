@@ -16,6 +16,9 @@ html,body,#wrapper {
 
 }
 
+.share{
+    bottom: 0;
+}
 .stat{
     position: absolute;
     width: 100px;
