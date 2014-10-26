@@ -4,13 +4,19 @@ var keyboard = Keyboard(document);
 var mono = MonoSynth(keyboard, 1);
 
 function Game(notes, keyboard){
-    var notes_to_play = (_.map(notes, function(i){return i.noteNumber}));
+    console.log(notes);
+    var notes_to_play = (_.map(notes, function(i){
+        return i.noteNumber}));
     var notes_played = [];
     var note_index = 0;
     var score = 0;
+    var mistakes = 0;
 
     var updateScore= function(){
         $('#score').text(score);
+    }
+    var updateMistakes= function(){
+        $('#mistakes').text(mistakes);
     }
     console.log(notes_to_play);
     keyboard.addEventListener('note_down', function(note){
@@ -19,9 +25,17 @@ function Game(notes, keyboard){
             score  = score+10;
             updateScore();
             note_index++;
+            if(note_index == (notes_to_play.length)) {
+                alert('You Won!!!!');
+            }
         }
         else{
-//            alert('You suck at this game');
+            mistakes++;
+            updateMistakes();
+            if (mistakes > 4 ){
+            alert('You suck at this game');
+
+            }
         }
     })
 }

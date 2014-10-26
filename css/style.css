@@ -5,12 +5,15 @@ html,body,#wrapper {
 }
 
 .stat{
-    width: 50px;
-    top: 10;
+    position: absolute;
+    width: 80px;
+    top: 0;
+    right: 0;
     float: right;
     text-align: center;
     font-family: verdana, arial, helvetica, sans-serif;
     font-weight: bold;
+    background-color: darkgray;
 }
 
 #score{

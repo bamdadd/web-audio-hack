@@ -16,11 +16,13 @@ function NoteRepo(type, noteNumber, timer){
 
     if (type == 'start'){
         var start_note = Note(noteNumber, timer);
+        console.log(noteNumber + "start");
         unfinished_notes[noteNumber] = start_note;
 
     }
     if (type == 'finish'){
         unfinished_notes[noteNumber].end_time = timer;
+        console.log(noteNumber + "finish");
         notes.push(unfinished_notes[noteNumber]);
 
     }
