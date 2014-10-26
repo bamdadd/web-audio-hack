@@ -4,10 +4,7 @@ function Note(noteNumber,start_time){
     var noteArray = ['C', 'C#/Db', 'D', 'D#/Eb','E','F', 'F#/Gb','G', 'G#/Ab', 'A', 'A#/Bb', 'B'];
 
     function noteMapper(noteNumber) {
-        console.log(noteNumber);
-        var rem = noteNumber % 12;
-        var index = Math.floor(noteNumber/12);
-        return noteArray[rem] + index;
+        return noteArray[noteNumber % 12] + " - " + Math.floor(noteNumber/12);
     }
 
     this.noteNumber = noteNumber;
@@ -61,7 +58,4 @@ function Visualiser(midifile, callback){
 
     var tickesPerMinute = (ticksPerBeat * bpm);
     var totalTicks = notes[notes.length - 1].end_time;
-
-    console.log(notes);
-
 }

@@ -72,8 +72,12 @@ function drawChart() {
     });
 
 
-    for (var i = notes[0].noteNumber; i <= notes[notes.length - 1].noteNumber; i++) {
-        noteNumbers.push(i);
+    // for (var i = notes[0].noteNumber; i <= notes[notes.length - 1].noteNumber; i++) {
+    //     noteNumbers.push(i);
+    // };
+
+    for (var i = 0; i <notes.length; i++) {
+        noteNumbers.push(notes[i].noteName);
     };
 
 
@@ -81,7 +85,7 @@ function drawChart() {
         notesToVisualise.push({
             startTime: note.start_time,
             endTime: note.end_time,
-            noteNumber: note.noteNumber,
+            noteNumber: note.noteName,
             status: "note-" + note.noteNumber
         })
     });
