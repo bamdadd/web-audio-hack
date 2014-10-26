@@ -46,6 +46,7 @@ function drawChart() {
 
     var noteNumbers = [];
 
+    Game(notes, keyboard);
 
     notes.sort(function (a, b) {
         return a.noteNumber - b.noteNumber;
@@ -83,7 +84,7 @@ function drawChart() {
     // second_half = notesToVisualise.slice(notesToVisualise.length / 2, notesToVisualise.length - 1);
 
     gantt(notesToVisualise);
-    Game(notes, keyboard);
+    
 
     var i = 0;
     var move = function() {
